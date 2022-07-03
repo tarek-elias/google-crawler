@@ -5,7 +5,7 @@ include('simple_html_dom.php');
 
 
 
-$html = file_get_html("http://www.google.ae/search?q=hello");
+$html = file_get_html("http://www.google.ae/search?q=amazon");
 
 
 $ranking = array();
@@ -31,7 +31,7 @@ for($i=0;$i<=50;$i++)
 {
   $item = $html -> find('div[id=main]',0)->childNodes($i);
   
-  if($item != null AND $item->has_child('span[dir="ltr"]') AND $item->has_child('h3') AND $item->has_child('a'))
+  if($item != null AND $item->has_child('span') AND $item->has_child('h3') AND $item->has_child('a') AND $item->has_child('div'))
   {
 
     echo 'Yes!' . $i . '<br>';  
@@ -50,30 +50,38 @@ echo '**************************************************************************
 $k2 = 0;
 $clean_res = array();
 
-for($k = 0; $k<= sizeof($temp); $k++)
-{
-
-  if($temp[$k] != null AND $temp[$k]->has_child('span[dir=ltr]') AND $temp[$k]->has_child('h3') AND $temp[$k]->has_child('a') AND $k!=0 AND $k!=1 AND $k!=2 AND $k!=3 AND $temp[$k]->firstChild()->firstChild()->firstChild()->nodeName() == 'a')
-  {
-    $clean_res[$k2] = $temp[$k];
-    echo 'Yessssssss!' . $k . $temp[$k] . '<br>' ;
-    $k2++;
-    //$temp[$k]->dump(true);
-  }
-}
-
 array_walk($temp, function($v,$k) use ($obj) {
     if(empty($v)) unset($temp->$k);
 });
 
-echo '***************************************************************************' . '<br>';
 
 
-for($k3=0;$k3<=sizeof($clean_res);$k3++)
+for($k = 0; $k<sizeof($temp); $k++)
 {
-  if($clean_res[0]->has_child('div'));
-  
+
+  if($temp[$k] != null AND $temp[$k]->has_child('span') AND $temp[$k]->has_child('h3') AND $temp[$k]->has_child('a') AND $temp[$k]->has_child('div') AND $temp[$k]->firstChild() != null AND $temp[$k]->firstChild()->firstChild() != null AND $temp[$k]->firstChild()->firstChild()-> firstChild() != null AND $temp[$k]->firstChild()->firstChild()->firstChild()->nodeName() == 'a')
+  {
+   
+    $clean_res[$k2] = $temp[$k];
+    echo 'Yessssssss!' . $k . $temp[$k] . '<br>' ;
+    $k2++;
+    //$temp[$k]->dump(true);
+    
+  }
 }
 
 
+echo '***************************************************************************' . '<br>';
+
+echo '<br>size of clean array: '. sizeof($clean_res). '<br>';
+/*
+
+for($k3=0;$k3<sizeof($clean_res);$k3++)
+{
+  if($clean_res[$k] != null AND $clean_res[$k3]->has_child('div'));
+  echo 'yes';
+}
+
+
+*/
 ?>
