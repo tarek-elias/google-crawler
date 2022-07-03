@@ -38,4 +38,3 @@ for($i=0;$i<sizeof($a_list);$i++)
 */
 
 
- AND $temp[$k]->firstChild()->firstChild()->firstChild()->nodeName() == 'a'

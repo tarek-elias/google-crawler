@@ -5,7 +5,7 @@ include('simple_html_dom.php');
 
 
 
-$html = file_get_html("http://www.google.ae/search?q=amazon");
+$html = file_get_html("http://www.google.ae/search?q=amazon&lr=en");
 
 
 $ranking = array();
@@ -74,14 +74,21 @@ for($k = 0; $k<sizeof($temp); $k++)
 echo '***************************************************************************' . '<br>';
 
 echo '<br>size of clean array: '. sizeof($clean_res). '<br>';
-/*
+
 
 for($k3=0;$k3<sizeof($clean_res);$k3++)
 {
-  if($clean_res[$k] != null AND $clean_res[$k3]->has_child('div'));
-  echo 'yes';
+    $ranking[$k3] = $k3;
+    $url[$k3] = $clean_res[$k3]->find('span',1)->plaintext;
+
 }
 
 
-*/
+
+    for($k4 = 0; $k4<sizeof($url); $k4++)
+    {
+        $url[$k4] = str_replace('/url?q=',"",$url[$k4]);
+      echo $url[$k4]. '<br>';
+    }
+
 ?>
