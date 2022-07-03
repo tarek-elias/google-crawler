@@ -1,0 +1,38 @@
+/*
+$item = $html -> find('div[id=main]',0)->childNodes(0);
+echo sizeof($item);
+*/
+
+
+
+
+/*
+for ($i = 14; $i <= 1000; $i++ ){
+    // echo "".$i. 'count'.$count;
+        $item = $html->find('div div div div div' , $i);
+       // $value[$i] = $item->plaintext;
+        
+}  
+
+*/
+
+
+
+
+/*
+
+$list = $html->find('div div div div div' , 14);
+
+echo $list;
+
+*/
+
+/*
+$a_list = $list->find('a');
+
+for($i=0;$i<sizeof($a_list);$i++)
+{
+    echo $a_list[$i];
+    echo "<br>";
+}
+*/

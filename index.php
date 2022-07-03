@@ -1,28 +1,25 @@
 <?php
+
+/*** Including Simple HTML DOM Library that will help us to parse the HTML elements from Google page, and to send the HTTP request to Google with a specific keyword */
 include('simple_html_dom.php');
-ini_set('memory_limit','200M');
+
+
 
 $html = file_get_html("http://www.google.ae/search?q=hello");
 
 
-//echo $html->find('title',0)->plaintext;
-
-
-$count = 0;
-$positions = array();
-$value= array();
-$data = array();
+$ranking = array();
+$url = array();
 $title = array();
 $description = array();
-$j = 0 ;
+$promoted = array();
+
 $temp = array();
 $x = 0;
+$j = 0 ;
 
 
-/*
-$item = $html -> find('div[id=main]',0)->childNodes(0);
-echo sizeof($item);
-*/
+/**Below is a Foreach loop to iterate over the HTML results and eliminate the Styles elements */
 
 foreach($html->find('<style>') as $style_element){
   $style_element->remove();
@@ -50,47 +47,33 @@ for($i=0;$i<=50;$i++)
 
 echo '***************************************************************************' . '<br>';
 
+$k2 = 0;
+$clean_res = array();
+
 for($k = 0; $k<= sizeof($temp); $k++)
 {
 
   if($temp[$k] != null AND $temp[$k]->has_child('span[dir=ltr]') AND $temp[$k]->has_child('h3') AND $temp[$k]->has_child('a') AND $k!=0 AND $k!=1 AND $k!=2 AND $k!=3 AND $temp[$k]->firstChild()->firstChild()->firstChild()->nodeName() == 'a')
   {
-
+    $clean_res[$k2] = $temp[$k];
     echo 'Yessssssss!' . $k . $temp[$k] . '<br>' ;
+    $k2++;
     //$temp[$k]->dump(true);
   }
 }
 
+array_walk($temp, function($v,$k) use ($obj) {
+    if(empty($v)) unset($temp->$k);
+});
+
+echo '***************************************************************************' . '<br>';
 
 
-/*
-for ($i = 14; $i <= 1000; $i++ ){
-    // echo "".$i. 'count'.$count;
-        $item = $html->find('div div div div div' , $i);
-       // $value[$i] = $item->plaintext;
-        
-}  
-
-*/
-
-
-
-
-/*
-
-$list = $html->find('div div div div div' , 14);
-
-echo $list;
-
-*/
-
-/*
-$a_list = $list->find('a');
-
-for($i=0;$i<sizeof($a_list);$i++)
+for($k3=0;$k3<=sizeof($clean_res);$k3++)
 {
-    echo $a_list[$i];
-    echo "<br>";
+  if($clean_res[0]->has_child('div'));
+  
 }
-*/
+
+
 ?>
