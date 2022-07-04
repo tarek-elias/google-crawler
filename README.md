@@ -1,7 +1,7 @@
 # Hi There 👋
 
 ## Description 📰
-This is a simple library (package), written with PHP to parse the HTML componenets, designed specifically to crawl the Google search results page and return the results in a form of objects. "Please refer to *Example of the results*".
+This is a simple library (package), written with PHP to parse the HTML componenets, designed specifically to crawl the Google search results page and return the results in a form of objects. "Please refer to **Example of the results**".
 
 ## Usage 🛠️
 ....
@@ -9,3 +9,5 @@ This is a simple library (package), written with PHP to parse the HTML componene
 
 ## Example of the results 🚦
 ........
+
+

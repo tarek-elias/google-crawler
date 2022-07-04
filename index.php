@@ -76,10 +76,14 @@ echo '**************************************************************************
 echo '<br>size of clean array: '. sizeof($clean_res). '<br>';
 
 
+
+
 for($k3=0;$k3<sizeof($clean_res);$k3++)
 {
     $ranking[$k3] = $k3;
-    $url[$k3] = $clean_res[$k3]->find('span',1)->plaintext;
+    $url[$k3] = $clean_res[$k3]->find('a',0)->href;
+    $title[$k3] = $clean_res[$k3]->find('span',0)->plaintext;
+    $description[$k3] = $clean_res[$k3]->find('span[dir=ltr]',2)->plaintext;
 
 }
 
@@ -88,7 +92,16 @@ for($k3=0;$k3<sizeof($clean_res);$k3++)
     for($k4 = 0; $k4<sizeof($url); $k4++)
     {
         $url[$k4] = str_replace('/url?q=',"",$url[$k4]);
-      echo $url[$k4]. '<br>';
+        echo $url[$k4]. '<br>';
     }
+
+    echo '***************************************************************************' . '<br>';
+
+echo 'First Object: <br>';
+for($k5=0;$k5<1;$k5++)
+{
+  echo $ranking[$k5]. '<br>'.$url[$k5]. '<br>'.$title[$k5]. '<br>'. $description[$k5];
+
+}
 
 ?>
