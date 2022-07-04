@@ -1,6 +1,6 @@
 <?php
 
-namespace GoogleCrawler;
+//namespace GoogleCrawler;
 
 /*** Including Simple HTML DOM Library that will help us to parse the HTML elements from Google page, and to send the HTTP request to Google with a specific keyword */
 include 'simple_html_dom.php';
@@ -26,14 +26,14 @@ class GoogleCrawler
     public $clean_res = [];
 
     /*** A simple function to make the HTTP request to Google.ae with the disered keyword */
-    function call_page($keyword)
+    function call_page()
     {
         $html = file_get_html("http://www.google.ae/search?q=$keyword&lr=en");
     }
 
 
     /**Below is a function with a foreach loop to iterate over the HTML results and eliminate the Styles elements */
-    function remove_styles($html)
+    function remove_styles()
     {
         foreach ($html->find('<style>') as $style_element) {
             $style_element->remove();
@@ -41,7 +41,7 @@ class GoogleCrawler
     }
 
     /** The first phase of filtering, getting the needed HTML componenets and saving them in a temporary array */
-    function phase_one_filtering($html)
+    function phase_one_filtering()
     {
         for ($i = 0; $i <= 50; $i++) {
             $item = $html->find('div[id=main]', 0)->childNodes($i);
@@ -67,7 +67,7 @@ class GoogleCrawler
     }
 
     /** A function to iterate over our temporary array and removing the null objects */
-    function remove_nulls($temp)
+    function remove_nulls()
     {
         array_walk($temp, function ($v, $k) use ($obj) {
             if (empty($v)) {
@@ -77,7 +77,7 @@ class GoogleCrawler
     }
 
     /** Phase two of filtering, a complex condition needed to get only the needed elements and saving them in the clean results array */
-    function phase_two_filtering($temp)
+    function phase_two_filtering()
     {
         for ($k = 0; $k < sizeof($temp); $k++) {
             if (
@@ -115,7 +115,7 @@ class GoogleCrawler
 
 
     /** This function will iterate over our clean results array and puts the results in the suitable arrays */
-    function assign_results($clean_res)
+    function assign_results()
     {
         for ($k3 = 0; $k3 < sizeof($clean_res); $k3++) {
             $ranking[$k3] = $k3;
@@ -125,11 +125,19 @@ class GoogleCrawler
                 'span[dir=ltr]',
                 2
             )->plaintext;
+            if($clean_res[$k3]->find('div[id=raw]',0) != null)
+            {
+                $promoted[$k3] = true;
+            }
+            else{
+                $promoted[$k3] = false;
+                
+            }
         }
     }
 
     /**A simple function to iterate over the URLs array and remove the unnecessary parts from the links */
-    function clean_urls($url)
+    function clean_urls()
     {
         for ($k4 = 0; $k4 < sizeof($url); $k4++) {
             $url[$k4] = str_replace('/url?q=', '', $url[$k4]);
@@ -152,8 +160,23 @@ class GoogleCrawler
                 '<br>' .
                 $title[$k5] .
                 '<br>' .
-                $description[$k5];
+                $description[$k5] .
+                '<br>' .
+                $promoted[$k5];
         }
     }
+
+    public function main()
+    {
+        call_page();
+        remove_styles();
+        phase_one_filtering();
+        remove_nulls();
+        phase_two_filtering();
+        assign_results();
+        clean_urls();
+        print_first_object();
+    }
+  
 }
 ?>
