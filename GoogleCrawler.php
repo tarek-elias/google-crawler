@@ -1,5 +1,7 @@
 <?php
 
+namespace GoogleCrawler;
+
 /*** Including Simple HTML DOM Library that will help us to parse the HTML elements from Google page, and to send the HTTP request to Google with a specific keyword */
 include 'simple_html_dom.php';
 

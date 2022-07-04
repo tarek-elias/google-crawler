@@ -1,0 +1,17 @@
+{
+    "name": "tarek/google-crawler",
+    "description": "A simple PHP script to crawl Google page results (in-progress)",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tarek-elias",
+            "email": "tarek.elias97@gmail.com"
+        }
+    ],"autoload": {
+        "psr-4": {
+            "GoogleCrawler\\":"/"
+        }
+    },
+    "require": {}
+}
