@@ -7,6 +7,8 @@ include 'simple_html_dom.php';
 
 class GoogleCrawler
 {
+
+    /*** Defining the needed variables and arrays */
     public $html = null;
     public $keyword = 'amazon';
 
@@ -23,12 +25,14 @@ class GoogleCrawler
     public $k2 = 0;
     public $clean_res = [];
 
+    /*** A simple function to make the HTTP request to Google.ae with the disered keyword */
     function call_page($keyword)
     {
         $html = file_get_html("http://www.google.ae/search?q=$keyword&lr=en");
     }
 
-    /**Below is a Foreach loop to iterate over the HTML results and eliminate the Styles elements */
+
+    /**Below is a function with a foreach loop to iterate over the HTML results and eliminate the Styles elements */
     function remove_styles($html)
     {
         foreach ($html->find('<style>') as $style_element) {
@@ -36,6 +40,7 @@ class GoogleCrawler
         }
     }
 
+    /** The first phase of filtering, getting the needed HTML componenets and saving them in a temporary array */
     function phase_one_filtering($html)
     {
         for ($i = 0; $i <= 50; $i++) {
@@ -61,6 +66,7 @@ class GoogleCrawler
             '<br>';
     }
 
+    /** A function to iterate over our temporary array and removing the null objects */
     function remove_nulls($temp)
     {
         array_walk($temp, function ($v, $k) use ($obj) {
@@ -70,6 +76,7 @@ class GoogleCrawler
         });
     }
 
+    /** Phase two of filtering, a complex condition needed to get only the needed elements and saving them in the clean results array */
     function phase_two_filtering($temp)
     {
         for ($k = 0; $k < sizeof($temp); $k++) {
@@ -103,9 +110,11 @@ class GoogleCrawler
         echo '***************************************************************************' .
             '<br>';
 
-        echo '<br>size of clean array: ' . sizeof($clean_res) . '<br>';
+        //echo '<br>size of clean array: ' . sizeof($clean_res) . '<br>';
     }
 
+
+    /** This function will iterate over our clean results array and puts the results in the suitable arrays */
     function assign_results($clean_res)
     {
         for ($k3 = 0; $k3 < sizeof($clean_res); $k3++) {
@@ -119,6 +128,7 @@ class GoogleCrawler
         }
     }
 
+    /**A simple function to iterate over the URLs array and remove the unnecessary parts from the links */
     function clean_urls($url)
     {
         for ($k4 = 0; $k4 < sizeof($url); $k4++) {
@@ -130,6 +140,8 @@ class GoogleCrawler
             '<br>';
     }
 
+
+    /**This function will print the first result */
     function print_first_object()
     {
         echo 'First Object: <br>';
