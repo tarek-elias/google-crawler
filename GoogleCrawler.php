@@ -7,7 +7,6 @@ include 'simple_html_dom.php';
 
 class GoogleCrawler
 {
-
     /*** Defining the needed variables and arrays */
     public $html = null;
     public $keyword = 'amazon';
@@ -30,7 +29,6 @@ class GoogleCrawler
     {
         $html = file_get_html("http://www.google.ae/search?q=$keyword&lr=en");
     }
-
 
     /**Below is a function with a foreach loop to iterate over the HTML results and eliminate the Styles elements */
     function remove_styles()
@@ -113,7 +111,6 @@ class GoogleCrawler
         //echo '<br>size of clean array: ' . sizeof($clean_res) . '<br>';
     }
 
-
     /** This function will iterate over our clean results array and puts the results in the suitable arrays */
     function assign_results()
     {
@@ -125,13 +122,10 @@ class GoogleCrawler
                 'span[dir=ltr]',
                 2
             )->plaintext;
-            if($clean_res[$k3]->find('div[id=raw]',0) != null)
-            {
+            if ($clean_res[$k3]->find('div[id=raw]', 0) != null) {
                 $promoted[$k3] = true;
-            }
-            else{
+            } else {
                 $promoted[$k3] = false;
-                
             }
         }
     }
@@ -147,7 +141,6 @@ class GoogleCrawler
         echo '***************************************************************************' .
             '<br>';
     }
-
 
     /**This function will print the first result */
     function print_first_object()
@@ -177,6 +170,5 @@ class GoogleCrawler
         clean_urls();
         print_first_object();
     }
-  
 }
 ?>
