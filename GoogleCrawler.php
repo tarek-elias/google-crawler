@@ -27,6 +27,7 @@ class GoogleCrawler
     /*** A simple function to make the HTTP request to Google.ae with the disered keyword */
     function call_page()
     {
+        $keyword = str_replace(' ', '+', $keyword); //replacing the spaces in the keyword with the plus symbol to be accepted as a valid URL parameter.
         $html = file_get_html("http://www.google.ae/search?q=$keyword&lr=en");
     }
 
