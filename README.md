@@ -13,5 +13,5 @@ Let's assume that you've searched for this keyword: "Amazon"
 **Order of the result:** 0 <br /> 
 **Link of the first Result:** https://www.amazon.com/amazonprime&sa=U&ved=2ahUKEwjHirqPgOD4AhXh4DgGHTfDA7IQjBB6BAgAEAU&usg=AOvVaw1PHTkbllyJouRpuY7L0Ydr<br />
 **The description of the first result:** Free shipping on millions of items. Get the best of Shopping and Entertainment with Prime. Enjoy low prices and great deals on the largest selection of..<br />
-**Promoted (is this reslut an AD?):** False<br />
+**Promoted (is this result an AD?):** False<br />
 
