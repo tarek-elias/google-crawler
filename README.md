@@ -1,7 +1,7 @@
 # Hi There 👋
 
 ## Description 📰
-This is a simple library (package), written with PHP to parse the HTML componenets, designed specifically to crawl the Google search results page and return the results in a form of objects. "Please refer to **Example of the results**".
+This is a simple library (package), written with PHP to parse the HTML componenets, designed specifically to crawl the Google search results page and return the results in a form of objects. "Please refer to **Example of the results**". [Under development] 
 
 ## Usage 🛠️
 This package is in progress, for testing purposes please download or close the repository and call the (test.php) file in the browser. [A PHP interprepter must be running]
